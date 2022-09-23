@@ -1,5 +1,5 @@
-import React, {useState} from "react"
-import { AppBar,  Box, Button, IconButton, Toolbar, Typography, TextField, InputAdornment } from "@mui/material"
+import React, {useState, useEffect} from "react"
+import { AppBar,  Box, Button, IconButton, Toolbar, Typography, TextField, InputAdornment, Paper } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
 import TestGrid from "../pages/TestGrid"
 import Search from "../pages/Search"
@@ -8,17 +8,41 @@ import {
     BrowserRouter,
     Routes,
     Route,
-    Link
-  } from "react-router-dom";
+    
+  } from "react-router-dom"
 
+import axios from "axios";
+import yelp from '../api/yelp'
 
 const Layout = () => {
-    const [layoutMessage, setLayoutMessage] = useState("I am the Layout")
-    const [layoutOtherMessage, setLayoutOtherMessage] = useState("I am the other one.")
+    const [searchText, setSearchText] = useState("Mexican Food")
+    const [results, setResults] = useState([])
+
+    const searchApi = async (term) => {
+
+        try {
+            const response = await yelp('92688',term)
+            console.log(response.data.businesses)
+            setResults(response.data.businesses)
+        } catch {
+            console.log('I am in the caught error')
+        }
+    }
+
+    useEffect(() => {
+        searchApi(searchText)
+    }, [])
+
+    const doSearch = (e) => {
+        setSearchText(e.target.value)
+        searchApi(e.target.value)
+    }
+
 
     return (
         <>
          <BrowserRouter>
+         <Paper sx={{backgroundColor:'#eeeeee'}}>
         <Box sx={{ flexGrow: 1, alignContent: "center", alignItems: "center", justifyContent:"center"  }}>
         <AppBar position="fixed">
             <Toolbar>
@@ -33,10 +57,10 @@ const Layout = () => {
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, alignContent: "center", alignItems: "center", justifyContent:"center" }}>
                 <TextField
-                    onChange={(e) => {setLayoutMessage(e.target.value)}}
+                    
                     onKeyPress={(e) => {
                         if (e.key === "Enter"){
-                            setLayoutOtherMessage(e.target.value)
+                            doSearch(e)
                         }
                     }}
                     
@@ -53,7 +77,7 @@ const Layout = () => {
                 
                 
             </Typography>
-            <TextField label="Search" variant="outlined" />
+           
            
                 
            
@@ -62,13 +86,13 @@ const Layout = () => {
         </AppBar>
     </Box>
     <Toolbar ></Toolbar>
-        <Typography variant="h3">{layoutMessage}</Typography>
-        <Typography variant="h3">{layoutOtherMessage}</Typography>
+        <Typography>Your search results for: {searchText}</Typography>
         <Routes>
-            <Route exact path="/" element={<TestGrid/>} />
-            <Route exact path="testgrid" element={<TestGrid/>} />
-            <Route exact path="search" element={<Search/>} />
+            <Route exact path="/" element={<TestGrid />} />
+            <Route exact path="testgrid" element={<TestGrid />} />
+            <Route exact path="search" element={<Search searchResults={results}/>} />
         </Routes>
+        </Paper>
         </BrowserRouter>
     </>
     )

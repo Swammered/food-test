@@ -9,9 +9,9 @@ const TestGrid = () => {
         <Grid spacing={2} container>
 
             {
-                people.map( (value) => {
+                people.map( (value, index) => {
                     return (
-                        <Grid xs={6} lg={2}  item>
+                        <Grid key={index} xs={6} lg={2}  item>
                             <Card>
                                 <CardContent>
                                     <Typography variant='h3'>{value}</Typography>
@@ -25,18 +25,7 @@ const TestGrid = () => {
             }
 
 
-          <Grid xs={6} lg={2}  item>
-            <Card>
-                <CardContent>
-                    <Typography variant='h3'>Kenny asdf</Typography>
-                </CardContent>
-            </Card>
-          </Grid>
-          <Grid xs={6} lg={2} item>Melanie</Grid>
-          <Grid xs={6} lg={2} item>James</Grid>
-          <Grid xs={6} lg={2} item>Grant</Grid>
-          <Grid xs={6} lg={2} item>Eden</Grid>
-          <Grid xs={6} lg={2} item>Scooter</Grid>
+ 
 
         </Grid>
         <Button component={Link} to="/search">Search</Button>

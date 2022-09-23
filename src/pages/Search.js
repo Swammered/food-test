@@ -1,18 +1,24 @@
 import React from "react"
-import { Grid, Typography, Button } from "@mui/material"
+import { Grid, Typography, Button, Card, CardContent  } from "@mui/material"
 import { Link } from "react-router-dom"
 
-const Search = () => {
+import SearchResults from "../components/searchResults"
+
+const Search = ({searchResults}) => {
+    
+
+    const cheapFood = searchResults.filter((value) => value.price === '$')
+    const moderateFood = searchResults.filter((value) => value.price === '$$')
+    const excpensiveFood = searchResults.filter((value) => value.price === '$$$')
     return (
         <>
-        <Grid spacing={2} container>
-          <Grid xs={6} lg={2}  item><Typography variant='h3'>Search Page</Typography></Grid>
-          <Grid xs={6} lg={2} item>Melanie</Grid>
-          <Grid xs={6} lg={2} item>James</Grid>
+
+        <SearchResults searchTerm={"Cheap Food"} resultList={cheapFood}  />
+        <SearchResults searchTerm={"Moderate Food"} resultList={moderateFood}  />
+        <SearchResults searchTerm={"Expensive Food"} resultList={excpensiveFood}  />
 
 
-        </Grid>
-        <Button component={Link} to="/testgrid">Test Grid</Button>
+   
         </>
     )
 }
