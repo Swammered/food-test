@@ -11,7 +11,6 @@ import {
     
   } from "react-router-dom"
 
-import axios from "axios";
 import yelp from '../api/yelp'
 
 const Layout = () => {
@@ -31,7 +30,7 @@ const Layout = () => {
 
     useEffect(() => {
         searchApi(searchText)
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     const doSearch = (e) => {
         setSearchText(e.target.value)
