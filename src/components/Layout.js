@@ -29,8 +29,9 @@ const Layout = () => {
     }
 
     useEffect(() => {
-        searchApi(searchText)
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+        //initialize
+        searchApi("Mexican Food")
+    }, []) 
 
     const doSearch = (e) => {
         setSearchText(e.target.value)

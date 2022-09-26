@@ -38,7 +38,7 @@ const SearchResults = ({searchTerm, resultList}) => {
                                     {value.name}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        <Typography>Rating: {value.rating} ({value.review_count})</Typography>
+                                        Rating: {value.rating} ({value.review_count})
                                     </Typography>
                                     </CardContent>
                                 </CardActionArea>
