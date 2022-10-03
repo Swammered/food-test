@@ -3,7 +3,8 @@ import { AppBar,  Box, Button, IconButton, Toolbar, Typography, TextField, Input
 import SearchIcon from '@mui/icons-material/Search';
 import TestGrid from "../pages/TestGrid"
 import Search from "../pages/Search"
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from '@mui/icons-material/Menu'
+import Detail from "../pages/Detail";
 import {
     BrowserRouter,
     Routes,
@@ -16,6 +17,7 @@ import yelp from '../api/yelp'
 const Layout = () => {
     const [searchText, setSearchText] = useState("Mexican Food")
     const [results, setResults] = useState([])
+    const [restaurantId, setRestaurantId] = useState([])
 
     const searchApi = async (term) => {
 
@@ -90,7 +92,8 @@ const Layout = () => {
         <Routes>
             <Route exact path="/" element={<TestGrid />} />
             <Route exact path="testgrid" element={<TestGrid />} />
-            <Route exact path="search" element={<Search searchResults={results}/>} />
+            <Route exact path="search" element={<Search searchResults={results} setRestaurantId={setRestaurantId}/>} />
+            <Route exact path="detail" element={<Detail searchResults={results} restaurantId={restaurantId}/>} />
         </Routes>
         </Paper>
         </BrowserRouter>

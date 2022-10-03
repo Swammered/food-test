@@ -1,10 +1,10 @@
 import React from "react"
-import { Grid, Typography, Button, Card, CardContent  } from "@mui/material"
-import { Link } from "react-router-dom"
+// import { Grid, Typography, Button, Card, CardContent  } from "@mui/material"
+// import { Link } from "react-router-dom"
 
 import SearchResults from "../components/searchResults"
 
-const Search = ({searchResults}) => {
+const Search = ({searchResults, setRestaurantId}) => {
     
 
     const cheapFood = searchResults.filter((value) => value.price === '$')
@@ -13,9 +13,9 @@ const Search = ({searchResults}) => {
     return (
         <>
 
-        <SearchResults searchTerm={"Cheap Food"} resultList={cheapFood}  />
-        <SearchResults searchTerm={"Moderate Food"} resultList={moderateFood}  />
-        <SearchResults searchTerm={"Expensive Food"} resultList={excpensiveFood}  />
+        <SearchResults searchTerm={"Cheap Food"} resultList={cheapFood} setRestaurantId={setRestaurantId}  />
+        <SearchResults searchTerm={"Moderate Food"} resultList={moderateFood}   setRestaurantId={setRestaurantId} />
+        <SearchResults searchTerm={"Expensive Food"} resultList={excpensiveFood}  setRestaurantId={setRestaurantId}  />
 
 
    

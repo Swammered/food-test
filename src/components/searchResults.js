@@ -1,8 +1,15 @@
 import React from "react"
-import { Grid, Typography,  Card, CardContent, CardActionArea, CardMedia  } from "@mui/material"
+import { Grid, Typography,  Card, CardContent,CardMedia, CardActions, Button  } from "@mui/material"
+import {useNavigate} from 'react-router-dom';
 
-const SearchResults = ({searchTerm, resultList}) => {
+const SearchResults = ({searchTerm, resultList,  setRestaurantId }) => {
     console.log("resultList",resultList)
+    let navigate = useNavigate();
+
+    const goToDetails = (restaurantId) => {
+        setRestaurantId(restaurantId)
+        navigate("/detail");
+    }
 
     return (
         <>
@@ -26,7 +33,7 @@ const SearchResults = ({searchTerm, resultList}) => {
                                 </CardContent>
                             </Card> */}
                             <Card sx={{ maxWidth: 345 }}>
-                                <CardActionArea>
+                                
                                     <CardMedia
                                     component="img"
                                     height="140"
@@ -41,7 +48,10 @@ const SearchResults = ({searchTerm, resultList}) => {
                                         Rating: {value.rating} ({value.review_count})
                                     </Typography>
                                     </CardContent>
-                                </CardActionArea>
+                                    <CardActions>
+                                    <Button size="small" onClick={(e) => goToDetails(value.id)}>Details</Button>
+                                    </CardActions>
+                                
                                 </Card>
                         </Grid>
                     )
