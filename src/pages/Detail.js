@@ -10,7 +10,7 @@ const Detail = ({searchResults, restaurantId}) => {
     return (
         <>
 
-            <Typography>Details: {restaurantId}</Typography>
+            <Typography>My Details: {restaurantId}</Typography>
 
    
         </>
