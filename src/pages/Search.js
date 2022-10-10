@@ -10,6 +10,7 @@ const Search = ({searchResults, setRestaurantId}) => {
     const cheapFood = searchResults.filter((value) => value.price === '$')
     const moderateFood = searchResults.filter((value) => value.price === '$$')
     const excpensiveFood = searchResults.filter((value) => value.price === '$$$')
+   
     return (
         <>
 

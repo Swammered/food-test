@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import { AppBar,  Box, Button, IconButton, Toolbar, Typography, TextField, InputAdornment, Paper } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
-import TestGrid from "../pages/TestGrid"
+
 import Search from "../pages/Search"
 import MenuIcon from '@mui/icons-material/Menu'
 import Detail from "../pages/Detail";
@@ -22,9 +22,14 @@ const Layout = () => {
     const searchApi = async (term) => {
 
         try {
-            const response = await yelp('92688',term)
-            console.log(response.data.businesses)
-            setResults(response.data.businesses)
+            //const response = await yelp('92688',term)
+            //console.log(response.data.businesses)
+            //setResults(response.data.businesses)
+
+            const response2 = await  fetch(`/api/yelp?location=92688&term=${term}`)
+            const data = await response2.json()
+            console.log(data.businesses)
+            setResults(data.businesses)
         } catch {
             console.log('I am in the caught error')
         }
@@ -33,6 +38,7 @@ const Layout = () => {
     useEffect(() => {
         //initialize
         searchApi("Mexican Food")
+        //console.log("setRestaurantId",setRestaurantId)
     }, []) 
 
     const doSearch = (e) => {
@@ -90,8 +96,7 @@ const Layout = () => {
     <Toolbar ></Toolbar>
         <Typography>Your search results for: {searchText}</Typography>
         <Routes>
-            <Route exact path="/" element={<TestGrid />} />
-            <Route exact path="testgrid" element={<TestGrid />} />
+            <Route exact path="/" element={<Search searchResults={results} setRestaurantId={setRestaurantId}/>} />
             <Route exact path="search" element={<Search searchResults={results} setRestaurantId={setRestaurantId}/>} />
             <Route exact path="detail" element={<Detail searchResults={results} restaurantId={restaurantId}/>} />
         </Routes>
