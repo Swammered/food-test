@@ -3,7 +3,7 @@ import { Grid, Typography,  Card, CardContent,CardMedia, CardActions, Button  } 
 import {useNavigate} from 'react-router-dom';
 
 const SearchResults = ({searchTerm, resultList,  setRestaurantId }) => {
-    console.log("resultList",resultList)
+    //console.log("resultList",resultList)
     let navigate = useNavigate();
 
     const goToDetails = (restaurantId) => {
