@@ -45,6 +45,8 @@ const SearchResults = ({searchTerm, resultList,  setRestaurantId }) => {
                                     {value.name}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
+                                        {value.location.address1} <br/>
+                                        {value.location.city}, {value.location.state} <br/> <br/>
                                         Rating: {value.rating} ({value.review_count})
                                     </Typography>
                                     </CardContent>
